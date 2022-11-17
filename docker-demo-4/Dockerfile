@@ -3,4 +3,5 @@ WORKDIR /opt/app
 ADD *.json ./
 RUN npm install
 ADD . .
+VOLUME ["/opt/app/dist"]
 CMD ["node", "./src/index.js"]
