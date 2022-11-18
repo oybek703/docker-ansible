@@ -1,0 +1,11 @@
+---
+- name: user
+  hosts: demo
+  tasks:
+    - name: Create user
+      vars:
+        user: yoriqulov
+      user:
+        name: "{{user}}"
+        state: present
+      become: true
