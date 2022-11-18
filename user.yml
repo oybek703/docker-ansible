@@ -11,6 +11,7 @@
             name: "{{user}}"
             state: present
           register: error
+          ignore_errors: true
         - name: Install curl
           apt:
             name: curl
