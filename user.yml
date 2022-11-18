@@ -17,6 +17,10 @@
             name: curl
             update-cache: yes
           register: error
+        - name: Fail on FAILED
+          command: echo "FAILED_HERE"
+          register: command_result
+          failed_when: "'FAILED_HERE' in comand_result.stdout"
       become: true
       rescue:
         - name: ERROR WAS HERE
