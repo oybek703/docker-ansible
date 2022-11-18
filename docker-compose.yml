@@ -1,21 +1,9 @@
 version: "3.8"
 services:
   api:
-    build:
-      context: .
-      dockerfile: ./apps/api/Dockerfile
-    container_name: api
-    restart: always
-    volumes:
-      - ./.env:/opt/app/.env
-    networks:
-      - myNetwork
-    ports:
-      - "3002:3000"
-    expose:
-      - "3000"
-    profiles:
-      - backend
+    extends:
+      file: docker-compose.api.yml
+      service: api
     depends_on:
       - rmq
   rmq:
