@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./apps/api/Dockerfile
+    container_name: "${NAME}"
     restart: always
     volumes:
       - ./.env:/opt/app/.env
@@ -18,8 +19,6 @@ services:
     restart: always
     networks:
       - myNetwork
-    profiles:
-      - queue
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
