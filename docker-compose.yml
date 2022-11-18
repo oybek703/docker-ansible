@@ -1,18 +1,24 @@
-version: '3'
+version: "3.8"
 services:
   api:
-    image: demo4
-    container_name: my-name
-    ports:
-      - "3000:3000"
-    networks:
-      - myTestNetwork
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    restart: always
     volumes:
-      - data:/opt/app/data
+      - ./.env:/opt/app/.env
+    networks:
+      - myNetwork
+  rmq:
+    image: rabbitmq:3-management
+    restart: always
+    networks:
+      - myNetwork
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+
 
 networks:
-  myTestNetwork:
+  myNetwork:
     driver: bridge
-
-volumes:
-  data:
