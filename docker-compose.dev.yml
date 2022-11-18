@@ -1,6 +1,0 @@
-version: "3.8"
-services:
-  rmq:
-    ports:
-      - published: 15672
-        target: 15672
