@@ -22,6 +22,7 @@
           register: command_result
           failed_when: "'FAILED_HERE' in comand_result.stdout"
       become: true
+      when: ansible_facts['distribution'] == 'CentOS'
       rescue:
         - name: ERROR WAS HERE
           debug:
