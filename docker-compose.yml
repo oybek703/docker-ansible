@@ -9,15 +9,20 @@ services:
       - ./.env:/opt/app/.env
     networks:
       - myNetwork
+    profiles:
+      - backend
+    depends_on:
+      - rmq
   rmq:
     image: rabbitmq:3-management
     restart: always
     networks:
       - myNetwork
+    profiles:
+      - queue
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-
 
 networks:
   myNetwork:
