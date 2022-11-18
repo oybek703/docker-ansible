@@ -1,6 +1,10 @@
 ---
 - name: user
   hosts: yoriqulov
+  vars_prompt:
+    - name: user
+      prompt: "Enter user"
+      private: on
   tasks:
     - name: Create user
       user:
