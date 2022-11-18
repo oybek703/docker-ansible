@@ -4,30 +4,8 @@
   tasks:
     - name: Preconfig block
       block:
-        - name: Create user
-          vars:
-            user: yoriqulov
-          user:
-            name: "{{user}}"
-            state: present
-          register: error
-          ignore_errors: true
-        - name: Install curl
-          apt:
-            name: curl
-            update-cache: yes
-          register: error
-        - name: Fail on FAILED
-          command: echo "FAILED_HERE"
-          register: command_result
-          failed_when: "'FAILED_HERE' in comand_result.stdout"
+        - name: Sleep
+          command: /bin/sleep 15
+          async: 1000
+          poll: 5
       become: true
-      when: ansible_facts['distribution'] == 'CentOS'
-      rescue:
-        - name: ERROR WAS HERE
-          debug:
-            var: error
-      always:
-         - name: Reboot
-           debug:
-             msg: 'Rebooooooting'
