@@ -1,13 +1,12 @@
 ---
 - name: user
   hosts: yoriqulov
-  vars_prompt:
-    - name: user
-      prompt: "Enter user"
-      private: on
   tasks:
     - name: Create user
       user:
         name: "{{user}}"
         state: present
       become: true
+      register: response
+    - debug:
+        var: response
