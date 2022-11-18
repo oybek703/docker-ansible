@@ -4,12 +4,16 @@ services:
     build:
       context: .
       dockerfile: ./apps/api/Dockerfile
-    container_name: "${NAME}"
+    container_name: api
     restart: always
     volumes:
       - ./.env:/opt/app/.env
     networks:
       - myNetwork
+    ports:
+      - "3002:3000"
+    expose:
+      - "3000"
     profiles:
       - backend
     depends_on:
@@ -22,6 +26,34 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
+    depends_on:
+      - converter
+  app:
+    build:
+      context: .
+      dockerfile: ./apps/app/Dockerfile
+    container_name: app
+    restart: always
+    networks:
+      - myNetwork
+    env_file:
+      - ./apps/app/.env
+    ports:
+      - "3001:80"
+    expose:
+      - "80"
+    depends_on:
+      - api
+  converter:
+    build:
+      context: .
+      dockerfile: ./apps/converter/Dockerfile
+    container_name: converter
+    restart: always
+    networks:
+      - myNetwork
+    env_file:
+      - ./apps/app/.env
 
 networks:
   myNetwork:
