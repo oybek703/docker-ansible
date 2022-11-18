@@ -1,6 +1,6 @@
 ---
 - name: user
-  hosts: demo
+  hosts: yoriqulov
   tasks:
     - name: Create user
       user:
