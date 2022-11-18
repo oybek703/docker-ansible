@@ -50,10 +50,10 @@ services:
       dockerfile: ./apps/converter/Dockerfile
     container_name: converter
     restart: always
+    volumes:
+      - ./.env:/opt/app/.env
     networks:
       - myNetwork
-    env_file:
-      - ./apps/app/.env
 
 networks:
   myNetwork:
