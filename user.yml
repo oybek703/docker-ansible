@@ -2,13 +2,20 @@
 - name: user
   hosts: yoriqulov
   tasks:
-    - name: Create user
-      vars:
-        user: yoriqulov
-      user:
-        name: "{{user}}"
-        state: present
+    - name: Preconfig block
+      block:
+        - name: Create user
+          vars:
+            user: yoriqulov
+          user:
+            name: "{{user}}"
+            state: present
+          register: response
+        - name: Install curl
+          apt:
+            name: curl
+            update-cache: yes
+          register: response
       become: true
-      register: response
     - debug:
         var: response
