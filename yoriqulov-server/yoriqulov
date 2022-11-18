@@ -1,2 +1,2 @@
 [yoriqulov]
-127.0.0.1 ansible_user=yoriqulov ansible_port=2222 user=yoriqulov
+127.0.0.1 ansible_user=yoriqulov ansible_port=2222
