@@ -5,6 +5,10 @@
 /**/build
 /uploads
 
+# Other files
+Vagrantfile
+.vagrant/*
+
 # Envs
 **/*.env
 TOKEN.txt
