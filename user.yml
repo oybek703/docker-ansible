@@ -7,6 +7,4 @@
         name: "{{user}}"
         state: present
       become: true
-      register: response
-    - debug:
-        var: response
+      debugger: always
