@@ -3,8 +3,12 @@
   hosts: yoriqulov
   tasks:
     - name: Create user
+      vars:
+        user: yoriqulov
       user:
         name: "{{user}}"
         state: present
       become: true
-      debugger: always
+      register: response
+    - debug:
+        var: response
