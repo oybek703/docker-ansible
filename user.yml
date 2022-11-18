@@ -10,12 +10,18 @@
           user:
             name: "{{user}}"
             state: present
-          register: response
+          register: error
         - name: Install curl
           apt:
             name: curl
             update-cache: yes
-          register: response
+          register: error
       become: true
-    - debug:
-        var: response
+      rescue:
+        - name: ERROR WAS HERE
+          debug:
+            var: error
+      always:
+         - name: Reboot
+           debug:
+             msg: 'Rebooooooting'
