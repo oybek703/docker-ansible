@@ -1,5 +1,5 @@
 ---
-- name: Precoonfig
+- name: Preconfig
   hosts: cluster
   tasks:
     - name: Install docker
