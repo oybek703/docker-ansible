@@ -1,6 +1,6 @@
 ---
 - name: Precoonfig
-  hosts: cluster
+  hosts: yoriqulov
   tasks:
     - name: Install docker
       block:
@@ -26,7 +26,7 @@
             update_cache: yes
             filename: docker
 
-        - name: Installing docker-ce
+        - name: Install docker-ce
           apt:
             name: docker-ce
             update_cache: yes
@@ -39,9 +39,17 @@
       become: yes
 
     - name: Install docker-compose
-      apt:
-        name: docker-compose-plugin
-        update_cache: yes
+      block:
+        - name: Get latest version of docker-compose
+          uri:
+            url: https://api.github.com/repos/docker/compose/releases/latest
+            body_format: json
+          register: page
+        - name: Installing docker-compose
+          get_url:
+            url: https://github.com/docker/compose/releases/download/{{page.json.tag_name}}/docker-compose-linux-x86_64
+            dest: ~/.docker/cli-plugins/docker-compose
+            mode: 0755
       become: yes
 
     - name: Finish installation
